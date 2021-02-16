@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       create: (context) => BookProvider(),
       child: MaterialApp(
         title: 'Book Store',
-        theme: ThemeData(primaryColor: Colors.deepOrange),
+        theme: ThemeData(primaryColor: Colors.deepOrange, accentColor: Colors.deepOrange),
         home: HomeScreen(),
       ),
     );

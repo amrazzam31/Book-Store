@@ -25,107 +25,115 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<BookProvider>(context);
     return Scaffold(
-      body: CustomScrollView(slivers: <Widget>[
-        SliverAppBar(
-            expandedHeight: 150.0,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                'Book Store',
-                style: TextStyle(fontSize: 25),
-              ),
-              background: Image.asset('images/background.jpg',
-                  fit: BoxFit.cover),
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NewBook()),
-                  );
-                },
-              ),
-            ]),
-        SliverToBoxAdapter(
-          child: Container(
-              color: Colors.deepOrangeAccent,
-              height: 60,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: 20, horizontal: 10),
-                child: Text(
-                  'New Arrivals'.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return NewBook();
+          }));
+        },
+      ),
+      body: provider.booksList == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : provider.booksList.isEmpty
+              ? Center(
+                  child: Container(
+                  child: Image.asset(
+                    'images/logo.png',
                   ),
-                ),
-              )),
-        ),
-        SliverPadding(
-          padding: EdgeInsets.all(15),
-          sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10.0,
-                crossAxisSpacing: 10.0,
-                childAspectRatio: 1.0,
-                crossAxisCount: 2),
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                Book book = provider.booksList[index];
-                return Container(
-                  height: 120,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return BookDetails(book.id);
-                        }),
-                      );
-                    },
-                    child: Builder(builder: (context) {
-                      return Column(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: 120,
-                              height: 140,
-                              child: Utility.imageFromBase64String(
-                                  book.image),
+                ))
+              : CustomScrollView(slivers: <Widget>[
+                  SliverAppBar(
+                    expandedHeight: 150.0,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      title: Text(
+                        'Book Store',
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      background: Image.asset('images/background.jpg',
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                        color: Colors.deepOrangeAccent,
+                        height: 60,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 10),
+                          child: Text(
+                            'New Arrivals'.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
-                          Text(
-                            book.name,
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            'Quantity: ${book.quantity}',
-                            style: TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red),
-                          ),
-                        ],
-                      );
-                    }),
+                        )),
                   ),
-                );
-              },
-              childCount: provider.booksList.length,
-            ),
-          ),
-        )
-      ]),
+                  SliverPadding(
+                    padding: EdgeInsets.all(15),
+                    sliver: SliverGrid(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 10.0,
+                          childAspectRatio: 1.0,
+                          crossAxisCount: 2),
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          Book book = provider.booksList[index];
+                          return Container(
+                            height: 120,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return BookDetails(book.id);
+                                  }),
+                                );
+                              },
+                              child: Builder(builder: (context) {
+                                return Column(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        width: 120,
+                                        height: 140,
+                                        child: Utility.imageFromBase64String(
+                                            book.image),
+                                      ),
+                                    ),
+                                    Text(
+                                      book.name,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      'Quantity: ${book.quantity}',
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            ),
+                          );
+                        },
+                        childCount: provider.booksList.length,
+                      ),
+                    ),
+                  )
+                ]),
     );
   }
 }
