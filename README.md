@@ -1,16 +1,25 @@
-# book_store
+# Book Store App
 
-A new Flutter application.
+#### This app is made by using the Flutter framework. It's a mobile app to present a library of books that you can add & borrow.
 
-## Getting Started
+# Preview
 
-This project is a starting point for a Flutter application.
+![Book Store Preview](https://user-images.githubusercontent.com/76887699/117577309-8b8bde00-b0e9-11eb-8c38-bfba876cd3c4.gif)
 
-A few resources to get you started if this is your first Flutter project:
+# ScreenShots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/76887699/117577393-e1f91c80-b0e9-11eb-90ca-2fb063035bce.jpg" width="200" height="450" />
+  <img src="https://user-images.githubusercontent.com/76887699/117577395-e4f40d00-b0e9-11eb-9adc-fa3ff8543ee9.jpg" width="200" height="450" /> 
+  <img src="https://user-images.githubusercontent.com/76887699/117577402-efaea200-b0e9-11eb-94a3-35522c636c72.jpg" width="200" height="450" />
+  <img src="https://user-images.githubusercontent.com/76887699/117577406-f2a99280-b0e9-11eb-8229-a83cad05d1c2.jpg" width="200" height="450" />
+  <img src="https://user-images.githubusercontent.com/76887699/117577413-f63d1980-b0e9-11eb-9b1c-c7c9a300c266.jpg" width="200" height="450" />
+</p>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Dependencies
+* provider                                                                                                                               
+* sqflite                                                                                                                             
+* path
+* image picker                                                                                                                               
+* rflutter alert                                                                                                                              
+
