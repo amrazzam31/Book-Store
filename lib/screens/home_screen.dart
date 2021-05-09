@@ -78,55 +78,78 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.all(15),
                     sliver: SliverGrid(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisSpacing: 10.0,
+                          mainAxisSpacing: 5.0,
                           crossAxisSpacing: 10.0,
-                          childAspectRatio: 1.0,
+                          childAspectRatio: 6 / 10,
                           crossAxisCount: 2),
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                           Book book = provider.booksList[index];
-                          return Container(
-                            height: 120,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return BookDetails(book.id);
-                                  }),
-                                );
-                              },
-                              child: Builder(builder: (context) {
-                                return Column(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        width: 120,
-                                        height: 140,
-                                        child: Utility.imageFromBase64String(
-                                            book.image),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return BookDetails(book.id);
+                                }),
+                              );
+                            },
+                            child: Builder(builder: (context) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    height: 160,
+                                    width: 120,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                      ),
+                                      child: Utility.imageFromBase64String(
+                                          book.image),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    height: 80,
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10.0),
+                                        bottomRight: Radius.circular(10.0),
                                       ),
                                     ),
-                                    Text(
-                                      book.name,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          flex: 2,
+                                          fit: FlexFit.tight,
+                                          child: Text(
+                                            book.name,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Flexible(
+                                          flex: 1,
+                                          child: Text(
+                                            'Quantity: ${book.quantity}',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.red),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Text(
-                                      'Quantity: ${book.quantity}',
-                                      style: TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.red),
-                                    ),
-                                  ],
-                                );
-                              }),
-                            ),
+                                  ),
+                                ],
+                              );
+                            }),
                           );
                         },
                         childCount: provider.booksList.length,
